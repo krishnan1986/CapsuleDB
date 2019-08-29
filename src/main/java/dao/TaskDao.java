@@ -1,10 +1,14 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import model.Task;
@@ -16,17 +20,30 @@ public class TaskDao implements TaskOperations {
 	HibernateUtil hibernateUtil;
 	
 	Transaction tx;
+	Session session;
+	SessionFactory sessionfactory;
 
-	public TaskDao() {
-		//set up session
-		setup();
-		
-	}
-
+	
 	@Override
-	public List<Task> fetchTasks() {
+	public List<Task> fetchTasks(Task filter) {
 		// TODO Auto-generated method stub
-		return null;
+		//set up
+		setup();
+		List<Task> fromDB= new ArrayList<Task>();
+		// build criteria
+		Criteria tc = session.createCriteria(Task.class);
+		Criterion name= Restrictions.eq("name", filter.getName());
+		
+		Criterion priority= Restrictions.eq("priority", filter.getPriority());
+		
+		Criterion startDate= Restrictions.eq("StartDate", filter.getStartDate());
+		
+		Criterion endDate= Restrictions.eq("EndDate", filter.getEndDate());
+		
+		tc.add(Restrictions.or(name,priority,startDate,endDate));
+		
+		fromDB= (List<Task>)tc.list();
+		return fromDB;
 	}
 
 	@Override
@@ -37,10 +54,10 @@ public class TaskDao implements TaskOperations {
 	
 	public void setup()
 	{
-		SessionFactory factory = HibernateUtil.getSessionFactory();
-		Session session = factory.openSession(); // create new session
+		 sessionfactory= HibernateUtil.getSessionFactory();
+		 session= sessionfactory.openSession(); // create new session
 
-		tx=session.beginTransaction();
+		 tx=session.beginTransaction();
 	}
 
 	@Override

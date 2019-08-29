@@ -21,9 +21,9 @@ public class ViewTaskController {
 	TaskDao taskdao;
 	
 	@GetMapping(value="getTasklist")
-	public  List<Task> getTaskFromUI()
+	public  List<Task> getTaskFromUI(@RequestBody Task filterCriteria)
 	{
-		return taskdao.fetchTasks();
+		return taskdao.fetchTasks(filterCriteria);
 	}
 	
 	@PostMapping(value="addTask")
