@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+   <property name="hibernate.dialect">
+      org.hibernate.dialect.MySQLDialect
+   </property>
+   <property name="hibernate.connection.driver_class">
+      com.mysql.jdbc.Driver
+   </property>
+   <property name="hibernate.connection.url">
+      jdbc:mysql://localhost:3306/capsuleTest
+   </property>
+   <property name="hibernate.connection.username">
+      root
+   </property>
+   <property name="hibernate.connection.password">
+      pass@word1
+   </property>
+<property name="show_sql">true</property>
+<property name="format_sql">true</property>
+<property name="hbm2ddl.auto">create</property>
+
+
+
+ <mapping class="com.capsule.taskMgr.model.Task"/>
+<mapping class="com.capsule.taskMgr.model.ParentTask"/> 
+
+
+<!-- 
+<mapping class="com.examples.hibernateexamples.EmployeeSSN"/> 
+<mapping class="com.examples.hibernateexamples.Address"/> 
+
+
+
+<property name="hibernate.cache.use_second_level_cache">true</property>
+<property name="hibernate.cache.use_query_cache">true</property>
+<property name="hibernate.cache.region.factory_class">
+	org.hibernate.cache.ehcache.EhCacheRegionFactory 
+	</property>
+
+<mapping class="com.examples.hibernateexamples.hql.User"/> 
+<mapping class="com.examples.hibernateexamples.hql.Address"/> 
+<mapping class="com.examples.hibernateexamples.hql.Employee"/> 
+<mapping class="com.examples.hibernateexamples.hql.Department"/>
+
+
+
+ -->
+
+<!--  
+
+
+<mapping class="com.examples.hibernateexamples.association.onetoone.Users"/> 
+<mapping class="com.examples.hibernateexamples.association.onetoone.Address"/> 
+
+<mapping class="com.examples.hibernateexamples.lifeCycle.User"/> 
+<mapping class="com.examples.hibernateexamples.lifeCycle.Address"/> 
+<mapping class="com.examples.hibernateexamples.lifeCycle.Employee"/> 
+<mapping class="com.examples.hibernateexamples.lifeCycle.Department"/> 
+
+<mapping class="com.examples.hibernateexamples.association.onetomany.Department"/> 
+<mapping class="com.examples.hibernateexamples.association.onetomany.Employee"/>
+-->
+
+
+
+<!-- 
+
+<mapping class="com.examples.hibernateexamples.association.onetomany.Employee"/> 
+<mapping class="com.examples.hibernateexamples.association.onetomany.Department"/> 
+
+ <mapping class="com.examples.hibernateexamples.User"/>
+<mapping class="com.examples.hibernateexamples.EmployeePrimary"/>
+
+
+<mapping class="com.examples.hibernateexamples.association.manytomany.Course"/> 
+<mapping class="com.examples.hibernateexamples.association.manytomany.Student"/> 
+
+
+
+<mapping class="com.examples.hibernateexamples.lifeCycle.User"/> 
+<mapping class="com.examples.hibernateexamples.lifeCycle.Address"/> 
+<mapping class="com.examples.hibernateexamples.lifeCycle.Employee"/> 
+<mapping class="com.examples.hibernateexamples.lifeCycle.Department"/>
+
+<mapping class="com.examples.hibernateexamples.inheritance.tablepersub.BillingDetailss"/> 
+<mapping class="com.examples.hibernateexamples.inheritance.tablepersub.BankAccounts"/> 
+<mapping class="com.examples.hibernateexamples.inheritance.tablepersub.CreditCards"/> 
+
+<mapping class="com.examples.hibernateexamples.inheritance.tablejoinedsubclass.BillingDetails"/> 
+<mapping class="com.examples.hibernateexamples.inheritance.tablejoinedsubclass.BankAccount"/> 
+<mapping class="com.examples.hibernateexamples.inheritance.tablejoinedsubclass.CreditCard"/> 
+<mapping class="com.examples.hibernateexamples.hql.Address"/> 
+
+
+
+<mapping class="com.examples.hibernateexamples.hql.User"/> 
+<mapping class="com.examples.hibernateexamples.hql.Employee"/> 
+<mapping class="com.examples.hibernateexamples.hql.Department"/>
+-->
+</session-factory>
+</hibernate-configuration>

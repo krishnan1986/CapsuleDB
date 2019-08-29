@@ -1,8 +1,8 @@
-package dao;
+package com.capsule.taskMgr.dao;
 
 import java.util.List;
 
-import model.Task;
+import com.capsule.taskMgr.model.Task;
 
 public interface TaskOperations {
 	

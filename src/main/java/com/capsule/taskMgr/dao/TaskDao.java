@@ -1,4 +1,4 @@
-package dao;
+package com.capsule.taskMgr.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import model.Task;
-import util.HibernateUtil;
+import com.capsule.taskMgr.model.Task;
+import com.capsule.taskMgr.util.HibernateUtil;
 
 public class TaskDao implements TaskOperations {
 	

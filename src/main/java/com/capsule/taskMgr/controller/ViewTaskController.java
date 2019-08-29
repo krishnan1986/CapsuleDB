@@ -1,4 +1,4 @@
-package controller;
+package com.capsule.taskMgr.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dao.TaskDao;
-import model.Task;;
+import com.capsule.taskMgr.dao.TaskDao;
+import com.capsule.taskMgr.model.Task;;
 
 @RestController
 @RequestMapping("task")
