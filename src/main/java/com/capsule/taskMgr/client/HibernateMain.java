@@ -1,6 +1,8 @@
 package com.capsule.taskMgr.client;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.hibernate.Session;
@@ -14,7 +16,7 @@ import com.capsule.taskMgr.util.HibernateUtil;
 public class HibernateMain {
 
 	@SuppressWarnings("deprecation")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		
 		//SessionFactory sessions=new Configuration().configure().buildSessionFactory();
 		SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -31,11 +33,11 @@ public class HibernateMain {
 		task1.setPriority(1);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
 		
-		Date startdate= new Date("12-08-2018");
-		task1.setStartDate(sdf.format(startdate));
+		///Date startdate= Calendar.getInstance().getTime();
+		task1.setStartDate(sdf.parse("12-08-2018"));
 		
-		Date enddate= new Date("12-08-2019");
-		task1.setEndDate(sdf.format(enddate));
+		///Date enddate= new Date("12-08-2019");
+		task1.setEndDate(sdf.parse("12-08-2019"));
 		
 		
 		Task task2=new Task();
@@ -44,11 +46,11 @@ public class HibernateMain {
 		task2.setPriority(1);
 		
 		
-		Date startdate1= new Date("12-07-2018");
-		task1.setStartDate(sdf.format(startdate));
+		//Date startdate1= new Date("12-07-2018");
+		task1.setStartDate(sdf.parse("12-07-2018"));
 		
-		Date enddate1= new Date("12-08-2019");
-		task1.setEndDate(sdf.format(enddate));
+		//Date enddate1= new Date("12-08-2019");
+		task1.setEndDate(sdf.parse("12-08-2019"));
 		
 		
 		ParentTask ptask=new ParentTask();

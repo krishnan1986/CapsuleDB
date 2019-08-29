@@ -1,5 +1,7 @@
 package com.capsule.taskMgr.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +26,10 @@ public class Task {
 	private int priority;
 	
 	@Column(name="start_date")
-	private String StartDate;
+	private Date StartDate;
 	
 	@Column(name="end_date")
-	private String EndDate;
+	private Date EndDate;
 	
 	// foreign key relation
 	@ManyToOne
@@ -66,21 +68,23 @@ public class Task {
 		this.priority = priority;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return StartDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		StartDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return EndDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		EndDate = endDate;
 	}
+
+	
 	
 
 }
