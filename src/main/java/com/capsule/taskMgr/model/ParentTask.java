@@ -31,7 +31,7 @@ public class ParentTask {
 	private String name;
 	
 	@OneToMany(mappedBy="ptask")
-	Set subtasks= new HashSet();
+	Set<Task> subtasks= new HashSet<Task>();
 
 	public String getName() {
 		return name;
