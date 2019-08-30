@@ -3,6 +3,8 @@ package com.capsule.taskMgr.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,10 +12,11 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.capsule.taskMgr.model.Task;
 import com.capsule.taskMgr.util.HibernateUtil;
-
+@Component
 public class TaskDao implements TaskOperations {
 	
 	@Autowired
@@ -25,25 +28,15 @@ public class TaskDao implements TaskOperations {
 
 	
 	@Override
-	public List<Task> fetchTasks(Task filter) {
+	public List<Task> fetchTasks() {
 		// TODO Auto-generated method stub
 		//set up
 		setup();
-		List<Task> fromDB= new ArrayList<Task>();
-		// build criteria
-		Criteria tc = session.createCriteria(Task.class);
-		Criterion name= Restrictions.eq("name", filter.getName());
+		String hql = "FROM Task";
+		TypedQuery<Task> query = session.createQuery(hql,Task.class);
+		List<Task> results = query.getResultList();
 		
-		Criterion priority= Restrictions.eq("priority", filter.getPriority());
-		
-		Criterion startDate= Restrictions.eq("StartDate", filter.getStartDate());
-		
-		Criterion endDate= Restrictions.eq("EndDate", filter.getEndDate());
-		
-		tc.add(Restrictions.or(name,priority,startDate,endDate));
-		
-		fromDB= (List<Task>)tc.list();
-		return fromDB;
+		return results;
 	}
 
 	@Override
@@ -64,6 +57,27 @@ public class TaskDao implements TaskOperations {
 	public void updateTask(Task task) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Task> fetchTasks(Task filter) {
+		// TODO Auto-generated method stub
+		List<Task> fromDB= new ArrayList<Task>();
+		
+		  // build criteria
+		  Criteria tc = session.createCriteria(Task.class); Criterion
+		  name= Restrictions.eq("name", filter.getName());
+		  
+		  Criterion priority= Restrictions.eq("priority", filter.getPriority());
+		  
+		  Criterion startDate= Restrictions.eq("StartDate", filter.getStartDate());
+		  
+		  Criterion endDate= Restrictions.eq("EndDate", filter.getEndDate());
+		  
+		  tc.add(Restrictions.or(name,priority,startDate,endDate));
+		 
+		fromDB= (List<Task>)tc.list();
+		return null;
 	}
 
 	

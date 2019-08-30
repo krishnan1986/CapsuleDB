@@ -55,12 +55,13 @@ public class HibernateMain {
 		
 		ParentTask ptask=new ParentTask();
 		ptask.setName("High Priortiy");
-		ptask.setParent_task_id(1);
+		//ptask.setParent_task_id(1);
 		
 		session.save(task1);
 		session.save(task2);
 		session.save(ptask);
 		tx.commit();
+		session.close();
 		
 		
 		
