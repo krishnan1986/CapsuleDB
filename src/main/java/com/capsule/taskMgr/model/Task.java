@@ -1,5 +1,7 @@
 package com.capsule.taskMgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -33,7 +35,8 @@ public class Task {
 	
 	// foreign key relation
 	@ManyToOne
-	@JoinColumn(name="parent_task_id")
+	@JoinColumn(name="p_task_id")
+	@JsonIgnore
 	private ParentTask ptask;
 
 	public ParentTask getPtask() {
