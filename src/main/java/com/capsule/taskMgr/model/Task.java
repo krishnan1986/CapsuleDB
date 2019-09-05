@@ -11,53 +11,68 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="task")
 public class Task {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int task_id;
+	private Integer task_id;
 	
+	public void setTask_id(Integer task_id) {
+		this.task_id = task_id;
+	}
+
 	@Column(name="name")
-	private String name;
+	private String taskname;
 	
 	@Column(name="priority" ,nullable = false)
 	private int priority;
 	
 	@Column(name="start_date")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date StartDate;
 	
 	@Column(name="end_date")
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date EndDate;
 	
 	// foreign key relation
 	@ManyToOne
 	@JoinColumn(name="parent_task_id")
-	private ParentTask ptask;
+	//@JsonIgnore
+	@JsonManagedReference
+	private ParentTask parentTask;
 
 	public ParentTask getPtask() {
-		return ptask;
+		return parentTask;
 	}
 
-	public void setPtask(ParentTask ptask) {
-		this.ptask = ptask;
-	}
-
-	public int getTask_id() {
+	public Integer getTask_id() {
 		return task_id;
 	}
 
-	public void setTask_id(int task_id) {
-		this.task_id = task_id;
+	public void setPtask(ParentTask ptask) {
+		this.parentTask = ptask;
 	}
+
+	/*
+	 * public int getTask_id() { return task_id; }
+	 * 
+	 * public void setTask_id(int task_id) { this.task_id = task_id; }
+	 */
 
 	public String getName() {
-		return name;
+		return taskname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String taskname) {
+		this.taskname = taskname;
 	}
 
 	public int getPriority() {

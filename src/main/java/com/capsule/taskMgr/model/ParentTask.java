@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="parent_task")
 public class ParentTask {
@@ -30,7 +32,8 @@ public class ParentTask {
 	@Column(name="parent_task_name")
 	private String name;
 	
-	@OneToMany(mappedBy="ptask")
+	@JsonBackReference
+	@OneToMany(mappedBy="parentTask")
 	Set<Task> subtasks= new HashSet<Task>();
 
 	public String getName() {

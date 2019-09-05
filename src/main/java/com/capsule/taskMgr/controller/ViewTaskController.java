@@ -4,26 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.capsule.taskMgr.dao.TaskDao;
 import com.capsule.taskMgr.model.Task;
 import com.capsule.taskMgr.rest.model.Tasks;;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(path="/task")
 public class ViewTaskController {
 	
 	 private static Tasks list = new Tasks();
 	@Autowired
 	TaskDao taskdao;
 	
-	@GetMapping(path="/", produces = "application/json")
+	//@GetMapping(path="/", produces = "application/json")
+	                @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json")
 	public  List<Task> getTaskFromUI()
 	{ 
   
@@ -33,16 +28,27 @@ public class ViewTaskController {
 		
 	}
 	
-	@PostMapping(value="addTask")
+	//@PostMapping
+	                @RequestMapping(value="/addTask",method=RequestMethod.POST,produces="application/json")
 	public void addTasktoDB(@RequestBody Task taskRequest)
 	{
 		taskdao.insertTask(taskRequest);
 	}
 	
-	@PutMapping(value="updateTask")
+	@PutMapping(value="/updateTask")
 	public void updateTasktoDB(@RequestBody Task taskRequest)
 	{
 		taskdao.updateTask(taskRequest);
 	}
+	
+	 @RequestMapping(value = "/searchTask", method = RequestMethod.POST, produces = "application/json")
+	 public List<Task> searchTasksinDB(@RequestBody Task taskfilter)
+	 {
+		 List<Task> results =taskdao.fetchTasks(taskfilter);
+			//list.setTasks(results);
+		    return results;
+	 }
+	
+	
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,14 +28,15 @@ public class TaskDao implements TaskOperations {
 	SessionFactory sessionfactory;
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Task> fetchTasks() {
 		// TODO Auto-generated method stub
 		//set up
 		setup();
 		String hql = "FROM Task";
-		TypedQuery<Task> query = session.createQuery(hql,Task.class);
-		List<Task> results = query.getResultList();
+		Query query =  session.createQuery(hql);
+		List<Task> results = query.list();
 		
 		return results;
 	}
@@ -42,7 +44,10 @@ public class TaskDao implements TaskOperations {
 	@Override
 	public void insertTask(Task task) {
 		// TODO Auto-generated method stub
-		
+		setup();
+		session.save(task);
+		tx.commit();
+		session.close();
 	}
 	
 	public void setup()
