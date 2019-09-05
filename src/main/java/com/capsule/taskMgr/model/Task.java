@@ -1,5 +1,7 @@
 package com.capsule.taskMgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,9 +26,9 @@ public class Task {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer task_id;
 	
-	public void setTask_id(Integer task_id) {
-		this.task_id = task_id;
-	}
+	/*
+	 * public void setTask_id(Integer task_id) { this.task_id = task_id; }
+	 */
 
 	@Column(name="name")
 	private String taskname;

@@ -25,9 +25,10 @@ public class ParentTask {
 		return parent_task_id;
 	}
 
-	public void setParent_task_id(int parent_task_id) {
-		this.parent_task_id = parent_task_id;
-	}
+	/*
+	 * public void setParent_task_id(int parent_task_id) { this.parent_task_id =
+	 * parent_task_id; }
+	 */
 
 	@Column(name="parent_task_name")
 	private String name;

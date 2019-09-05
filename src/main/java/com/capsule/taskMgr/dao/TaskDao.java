@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -65,24 +68,39 @@ public class TaskDao implements TaskOperations {
 	}
 
 	@Override
-	public List<Task> fetchTasks(Task filter) {
+	public List<Task> fetchTasks(String taskname) {
 		// TODO Auto-generated method stub
-		List<Task> fromDB= new ArrayList<Task>();
+		//List<Task> fromDB= new ArrayList<Task>();
 		
 		  // build criteria
-		  Criteria tc = session.createCriteria(Task.class); Criterion
-		  name= Restrictions.eq("name", filter.getName());
-		  
-		  Criterion priority= Restrictions.eq("priority", filter.getPriority());
-		  
-		  Criterion startDate= Restrictions.eq("StartDate", filter.getStartDate());
-		  
-		  Criterion endDate= Restrictions.eq("EndDate", filter.getEndDate());
-		  
-		  tc.add(Restrictions.or(name,priority,startDate,endDate));
+		//	session
+		 setup();
+		
+		/*
+		 * SQLQuery q
+		 * =session.createSQLQuery("select * from task where name=:taskname");
+		 * q.addEntity(Task.class); q.setParameter("taskname", taskname);
+		 */
+		
+		 /* CriteriaBuilder cb =session.getCriteriaBuilder(); CriteriaQuery<Task> tc ;
+		  Criterion name= Restrictions.eq("name", filter.getName());
+		 */
+		/*
+		 * Criterion priority= Restrictions.eq("priority", filter.getPriority());
+		 * 
+		 * Criterion startDate= Restrictions.eq("StartDate", filter.getStartDate());
+		 * 
+		 * Criterion endDate= Restrictions.eq("EndDate", filter.getEndDate());
+		 */
+		 // tc.add(Restrictions.or(name);//priority,startDate,endDate));
+		  //tc.add(name);
+		
+		  Criteria c= session.createCriteria(Task.class);
+		  c.add(Restrictions.eq("taskname",taskname));
 		 
-		fromDB= (List<Task>)tc.list();
-		return null;
+		 // List<Task>fromDB= (List<Task>)q.list();
+		 List<Task> fromDB=c.list();
+		return fromDB;
 	}
 
 	
