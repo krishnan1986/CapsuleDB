@@ -1,10 +1,15 @@
 package com.capsule.taskMgr.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +23,15 @@ import com.capsule.taskMgr.model.Task;
 import com.capsule.taskMgr.rest.model.Tasks;;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/ViewTask")
 public class ViewTaskController {
 	
-	 private static Tasks list = new Tasks();
-	@Autowired
-	TaskDao taskdao;
+	 
+		@Autowired
+		TaskDao taskdao;
 	
-	//@GetMapping(path="/", produces = "application/json")
-	                @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping(path="/tasks",produces="application/json")
+	      //          @RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = "application/json")
 	public  List<Task> getTaskFromUI()
 	{ 
   
@@ -35,32 +41,34 @@ public class ViewTaskController {
 		
 	}
 	
-	//@PostMapping
-	                @RequestMapping(value="/addTask",method=RequestMethod.POST,produces="application/json")
-	public void addTasktoDB(@RequestBody Task taskRequest)
-	{
-		taskdao.insertTask(taskRequest);
-	}
 	
-	@PutMapping(value="/updateTask")
+	
+	@PutMapping
+	//(value="/updateTask")
 	public void updateTasktoDB(@RequestBody Task taskRequest)
 	{
 		taskdao.updateTask(taskRequest);
 	}
 	
-	// @RequestMapping(value = "/searchTask", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
-	@GetMapping(value="/searchTask")
-	@ResponseBody
-	 public List<Task> searchTasksinDB(@RequestParam  String name)
-	 {
-		/*
-		 * Task taskfilter =new Task(); taskfilter.setName(name);
-		 */
-		List<Task> results =taskdao.fetchTasks(name );
-			//list.setTasks(results);
-		    return results;
-	 }
-	
-	
+	@DeleteMapping
+	//(value="/endTask")
+	public void removeTask(@RequestBody Task task )
+	{
+		taskdao.deleteTask(task);
+	}
 
+	// @RequestMapping(value = "/searchTask", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
+		@GetMapping(value="/searchTask")
+		@ResponseBody
+		 public List<Task> searchTasksinDB(@RequestParam  String name)
+		 {
+			/*
+			 * Task taskfilter =new Task(); taskfilter.setName(name);
+			 */
+			List<Task> results =taskdao.fetchTasks(name );
+				//list.setTasks(results);
+			    return results;
+		 }
+		
+		
 }

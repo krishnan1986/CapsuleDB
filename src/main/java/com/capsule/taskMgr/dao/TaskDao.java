@@ -104,4 +104,12 @@ public class TaskDao implements TaskOperations {
 	}
 
 	
+	public void deleteTask(Task task)
+	{
+		setup();
+		session.delete(task);
+		session.close();
+		
+	}
+	
 }
