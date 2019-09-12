@@ -43,6 +43,14 @@ public class TaskDao implements TaskOperations {
 		
 		return results;
 	}
+	
+	/*
+	 * public List<Task> findByName(String name) { setup(); String hql =
+	 * "FROM Task where name=:name"; Query query = session.createQuery(hql);
+	 * query.setParameter("name",name);
+	 * 
+	 * }
+	 */
 
 	@Override
 	public void insertTask(Task task) {
@@ -104,10 +112,17 @@ public class TaskDao implements TaskOperations {
 	}
 
 	
-	public void deleteTask(Task task)
+	public void deleteTask(String taskname)
 	{
 		setup();
-		session.delete(task);
+		
+	//	setup();
+		String hql = "DELETE FROM Task where name=:task_name";
+		Query query = session.createQuery(hql);
+		query.setParameter("task_name", taskname);
+		int result = query.executeUpdate();
+		System.out.println("Rows affected: " + result);
+	//	session.delete(task);
 		session.close();
 		
 	}

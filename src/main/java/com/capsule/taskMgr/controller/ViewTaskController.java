@@ -1,15 +1,10 @@
 package com.capsule.taskMgr.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capsule.taskMgr.dao.TaskDao;
-import com.capsule.taskMgr.model.Task;
-import com.capsule.taskMgr.rest.model.Tasks;;
+import com.capsule.taskMgr.model.Task;;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ViewTask")
@@ -50,11 +44,13 @@ public class ViewTaskController {
 		taskdao.updateTask(taskRequest);
 	}
 	
-	@DeleteMapping
-	//(value="/endTask")
-	public void removeTask(@RequestBody Task task )
+		//@DeleteMapping(value="/endTask/{taskname}")
+	 @RequestMapping(value = "/endTask", method = RequestMethod.DELETE)
+	public void removeTask(@RequestParam String taskName )
 	{
-		taskdao.deleteTask(task);
+		// find by name 
+		taskdao.deleteTask(taskName);
+		//taskdao.deleteTask(restask);
 	}
 
 	// @RequestMapping(value = "/searchTask", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
